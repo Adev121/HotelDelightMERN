@@ -1,0 +1,28 @@
+.formRooms input,textarea,select{
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 5px;
+    margin: 0px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.formRooms label{
+    font-size: 15px;
+    margin:10px
+}
+.formRooms button{
+    background-color: green; /* Green */
+    color:white;
+    margin: 10px;
+    padding: 10px 20px;
+}
+.formRooms button:hover{
+    background-color: #4CAF50; /* Green */
+    transition: transform 0.1s;
+    cursor: pointer;
+    transform: scale(1.1);
+
+}
