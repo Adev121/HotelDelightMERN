@@ -6,8 +6,15 @@ import moment from "moment";
 import "../components/loader.css";
 import axios from "axios";
 import toast from "react-hot-toast";
-import swal from 'sweetalert';
+import swal from "sweetalert";
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import CheckoutForm from "./CheckoutForm";
 
+
+const stripePromise = loadStripe(
+  "pk_test_51RKZ1VR3MkzWkbTGJjzCnvHMpTHjqmK5dJELPn2PqkXf8htujx4eZ0U9b48HNoUcAUJc4pjpU212fLBX85GOZzso00240pIt3b"
+);
 function BookingScreen() {
   const [loading, setloading] = useState(true);
   const { _id, cin, cout } = useParams();
@@ -20,48 +27,49 @@ function BookingScreen() {
   const checkoutDate = moment(cout, "DD-MM-YYYY");
   const totalDays = checkoutDate.diff(checkinDate, "days");
   const totalAmount = room.rentperday * checkoutDate.diff(checkinDate, "days");
-setTimeout(()=>{
-    setloading(false)
-},3000)
+  setTimeout(() => {
+    setloading(false);
+  }, 3000);
 
-const currentUser=JSON.parse(localStorage.getItem("newuser")).name;
+  const currentUser = JSON.parse(localStorage.getItem("newuser")).name;
 
-const bookingDetails = {
-  room:room.name,
-  roomid:room._id,
-  userid:JSON.parse(localStorage.getItem("newuser")).id,
-  username:currentUser,
-  checkin:cin,
-  checkout:cout,
-  totalamount:totalAmount,
-  totaldays:totalDays,
-}
-console.log(bookingDetails)
+  const bookingDetails = {
+    room: room.name,
+    roomid: room._id,
+    userid: JSON.parse(localStorage.getItem("newuser")).id,
+    username: currentUser,
+    checkin: cin,
+    checkout: cout,
+    totalamount: totalAmount,
+    totaldays: totalDays,
+  };
+  console.log(bookingDetails);
 
+  //Payment token
+  // const onToken = (token) => {
+  //   console.log(token);
+  // };
 
+  const handleBooking = async () => {
+    await axios
+      .post("http://localhost:5000/bookings", bookingDetails)
+      .then((res) => {
+        if (res.data) {
+          console.log(res.data);
+          setTimeout(() => {
+            // swal("Room Booked Successfully !", "", "success");
+            window.location.href = "/success";
+            toast.success("Room Booked Successfully !");
+          }, 1000);
 
-const handleBooking= async()=>{
-await axios.post('http://localhost:5000/bookings',bookingDetails)
-.then((res)=>{
-  if(res.data)
-  {
-    console.log(res.data)
-    setTimeout(()=>{
-      
-      // swal("Room Booked Successfully !", "", "success");
-      window.location.href='/success';
-      toast.success("Room Booked Successfully !");
-    },1000)
-    
-    console.log('Room Booked Successfully ')
-  }
-  
-})
-.catch((err)=>{
-  console.log(err)
-  toast.error(`${err.response.data.message}`);
-})
-}
+          console.log("Room Booked Successfully ");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(`${err.response.data.message}`);
+      });
+  };
   return (
     <>
       {loading ? (
@@ -75,7 +83,7 @@ await axios.post('http://localhost:5000/bookings',bookingDetails)
             <div className="bg-white rounded-lg shadow-lg p-6 md:flex md:gap-6 ">
               {/* Image Section */}
               <div className="md:w-1/2">
-              <h2 className="text-lg font-semibold mb-2">{room.name}</h2>
+                <h2 className="text-lg font-semibold mb-2">{room.name}</h2>
                 <img
                   src={room.imageurls[0]}
                   alt="Hotel Room"
@@ -121,10 +129,16 @@ await axios.post('http://localhost:5000/bookings',bookingDetails)
                     <strong>Total Amount :</strong> ₹ {totalAmount} /-
                   </p>
 
-                  <button className="mt-4 bg-black text-white px-5 py-2 rounded-md hover:bg-gray-800" onClick={()=>{handleBooking()}} > 
-                    {/* onClick={handleBooking} */}
+                  {/* <button
+                    className="mt-4 bg-black text-white px-5 py-2 rounded-md hover:bg-gray-800"
+                    onClick={() => {
+                      handleBooking();
+                    }}
+                  >
+                    onClick={handleBooking}
                     Pay Now
-                  </button>
+                  </button> */}
+                  <CheckoutForm netamount={totalAmount} handleBooking={handleBooking}/>
                 </div>
               </div>
             </div>

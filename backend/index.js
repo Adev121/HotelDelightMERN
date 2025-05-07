@@ -9,6 +9,7 @@ import availableRoomsRoute from './routes/booking.route.js'
 import cancelbookingRoute from './routes/booking.route.js'
 import getAllUserRoute from './routes/user.route.js'
 import addroomsRoute from './routes/room.route.js'
+import paymentRoute from './routes/payment.route.js'
 import cors from 'cors'
 
 const app = express()
@@ -40,6 +41,7 @@ const uri = process.env.mongoUri;
  app.use('/',cancelbookingRoute);
  app.use('/',getAllUserRoute);
  app.use('/',addroomsRoute);
+ app.use('/',paymentRoute);
 
 
 
