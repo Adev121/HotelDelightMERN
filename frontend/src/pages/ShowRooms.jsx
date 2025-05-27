@@ -11,7 +11,7 @@ function ShowRooms() {
   useEffect(() => {
     const fetchrooms = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/getRooms");
+        const res = await axios.get("https://hoteldelight-backend.onrender.com/getRooms");
         setRooms(res.data);
         console.log(res.data);
       } catch (error) {

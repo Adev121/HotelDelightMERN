@@ -72,7 +72,7 @@ function Home() {
         </div>
       </div>
 
-      <NewDatePicker />
+      {/* <NewDatePicker /> */}
       <CarousalMenu />
       <ListRooms
         checkIN={checkin}

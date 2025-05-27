@@ -10,7 +10,7 @@ function ListRooms({ checkIN, checkOUT, roomType, searchrooms }) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/getRooms');
+        const res = await axios.get('https://hoteldelight-backend.onrender.com/getRooms');
         const allRooms = res.data;
         const availablerooms = [];
 

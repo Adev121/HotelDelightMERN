@@ -23,7 +23,7 @@ function AdminScreen() {
       const fetchBookings = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:5000/getUserBookings`
+            `https://hoteldelight-backend.onrender.com/getUserBookings`
           );
           setgetBookings(response.data);
         } catch (error) {
@@ -33,7 +33,7 @@ function AdminScreen() {
 
       const getRooms = async (req, res) => {
         try {
-          const res = await axios.get(`http://localhost:5000/getRooms`);
+          const res = await axios.get(`https://hoteldelight-backend.onrender.com/getRooms`);
           setgetRooms(res.data);
           console.log(res.data);
         } catch (error) {
@@ -43,7 +43,7 @@ function AdminScreen() {
 
       const getAllUsers = async (req, res) => {
         try {
-          const res = await axios.get(`http://localhost:5000/getUsers`);
+          const res = await axios.get(`https://hoteldelight-backend.onrender.com/getUsers`);
           setallusers(res.data);
           console.log(res.data);
         } catch (error) {
@@ -304,7 +304,7 @@ const handleAddRoom = async ()=>{
     };
     console.log(data);
     try {
-        const res = await axios.post("http://localhost:5000/addrooms", data);
+        const res = await axios.post("https://hoteldelight-backend.onrender.com/addrooms", data);
     if (res.status === 200) {
         swal("Room added successfully",'','success');
     } else {

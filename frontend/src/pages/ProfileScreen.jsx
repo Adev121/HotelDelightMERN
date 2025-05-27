@@ -30,7 +30,7 @@ function ProfileScreen() {
       const fetchBookings = async () => {
         try {
           const response = await axios.get(
-            `http://localhost:5000/getUserBookings`
+            `https://hoteldelight-backend.onrender.com/getUserBookings`
           );
           // setuserBooking(response.data);
           console.log(response.data);
@@ -101,7 +101,7 @@ export function BookingCard({ item }) {
     const handleCancelBooking = async () => {
         const bookingid = item._id;
         try {
-          const response = await axios.post(`http://localhost:5000/cancelBooking`, { bookingid });    
+          const response = await axios.post(`https://hoteldelight-backend.onrender.com/cancelBooking`, { bookingid });    
           console.log(response.data);
           
           setTimeout(()=>{
@@ -189,7 +189,7 @@ export function BookingCard({ item }) {
 //     useEffect(async ()=>{
 
 //             try {
-//                 const response = await axios.post(`http://localhost:5000/cancelBooking`, { bookingid });
+//                 const response = await axios.post(`https://hoteldelight-backend.onrender.com/cancelBooking`, { bookingid });
 //                 console.log(response.data);
 //                 setCancelBooking(response.data);
 //                 console.log("Booking Cancelled !")

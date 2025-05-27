@@ -52,7 +52,7 @@ function BookingScreen() {
 
   const handleBooking = async () => {
     await axios
-      .post("http://localhost:5000/bookings", bookingDetails)
+      .post("https://hoteldelight-backend.onrender.com/bookings", bookingDetails)
       .then((res) => {
         if (res.data) {
           console.log(res.data);

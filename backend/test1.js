@@ -25,7 +25,7 @@ function  checkAvailability(availableDt){
 }
 
 const response =async ()=>{
-    await fetch('http://localhost:5000/getRooms')
+    await fetch('https://hoteldelight-backend.onrender.com/getRooms')
     .then((res) => res.json())
     .then((data) => console.log(data));    
     

@@ -25,7 +25,7 @@ function Login() {
     };
 
     await axios
-      .post("http://localhost:5000/login", userInfo)
+      .post("https://hoteldelight-backend.onrender.com/login", userInfo)
       .then((res) => {
         if (res.data) {
           localStorage.setItem("newuser",JSON.stringify(res.data.user));

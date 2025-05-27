@@ -23,7 +23,7 @@ function Signup() {
       password: data.password,
     };
     await axios
-      .post("http://localhost:5000/signup", userInfo)
+      .post("https://hoteldelight-backend.onrender.com/signup", userInfo)
       .then((res) => {
         setTimeout(() => {
           toast.success("User Successfully created!");

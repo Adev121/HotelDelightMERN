@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 function CheckoutForm({ netamount,handleBooking }) {
   const handlePayment = async (req, res) => {
     try {
-      const res =await axios.post("http://localhost:5000/payment", {
+      const res =await axios.post("https://hoteldelight-backend.onrender.com/payment", {
         amount: netamount,
       });
       const data= res.data.response;
